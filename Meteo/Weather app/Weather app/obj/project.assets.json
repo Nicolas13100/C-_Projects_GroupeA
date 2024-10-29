@@ -55,24 +55,26 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\moyon\\.nuget\\packages\\": {}
+    "C:\\Users\\nicol\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\moyon\\Desktop\\C-_Projects_GroupeA\\Meteo\\Meteo\\Weather app\\Weather app\\Weather app.csproj",
+      "projectUniqueName": "C:\\Users\\nicol\\OneDrive\\Bureau\\C#\\Meteo\\Weather app\\Weather app\\Weather app.csproj",
       "projectName": "Weather app",
-      "projectPath": "C:\\Users\\moyon\\Desktop\\C-_Projects_GroupeA\\Meteo\\Meteo\\Weather app\\Weather app\\Weather app.csproj",
-      "packagesPath": "C:\\Users\\moyon\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\moyon\\Desktop\\C-_Projects_GroupeA\\Meteo\\Meteo\\Weather app\\Weather app\\obj\\",
+      "projectPath": "C:\\Users\\nicol\\OneDrive\\Bureau\\C#\\Meteo\\Weather app\\Weather app\\Weather app.csproj",
+      "packagesPath": "C:\\Users\\nicol\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\nicol\\OneDrive\\Bureau\\C#\\Meteo\\Weather app\\Weather app\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\moyon\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\nicol\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net8.0-windows"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
