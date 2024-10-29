@@ -1,7 +1,3 @@
 .idea
-\Calculatrice\.idea
-\Calculatrice\Calculatrice\bin\
-\Calculatrice\Calculatrice\obj\
-\Meteo\Weather app\.idea
-\Meteo\Weather app\Weather app\bin\
-\Meteo\Weather app\Weather app\obj\
+bin
+obj
