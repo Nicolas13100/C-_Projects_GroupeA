@@ -34,7 +34,7 @@ partial class Form1
     private System.Windows.Forms.Label lblConditions;
     private System.Windows.Forms.PictureBox pictureBoxIcon;
     
-     private void InitializeComponent()
+    private void InitializeComponent()
     {
         this.txtCity = new System.Windows.Forms.TextBox();
         this.btnGetWeather = new System.Windows.Forms.Button();
