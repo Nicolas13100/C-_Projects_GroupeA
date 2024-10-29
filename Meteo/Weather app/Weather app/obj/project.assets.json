@@ -55,19 +55,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\moyon\\.nuget\\packages\\": {}
+    "C:\\Users\\fabib\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\moyon\\Desktop\\C-_Projects_GroupeA\\Meteo\\Meteo\\Weather app\\Weather app\\Weather app.csproj",
+      "projectUniqueName": "C:\\Users\\fabib\\Documents\\Ynov\\B2\\C#\\Projets\\C-_Projects_GroupeA\\Meteo\\Weather app\\Weather app\\Weather app.csproj",
       "projectName": "Weather app",
-      "projectPath": "C:\\Users\\moyon\\Desktop\\C-_Projects_GroupeA\\Meteo\\Meteo\\Weather app\\Weather app\\Weather app.csproj",
-      "packagesPath": "C:\\Users\\moyon\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\moyon\\Desktop\\C-_Projects_GroupeA\\Meteo\\Meteo\\Weather app\\Weather app\\obj\\",
+      "projectPath": "C:\\Users\\fabib\\Documents\\Ynov\\B2\\C#\\Projets\\C-_Projects_GroupeA\\Meteo\\Weather app\\Weather app\\Weather app.csproj",
+      "packagesPath": "C:\\Users\\fabib\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\fabib\\Documents\\Ynov\\B2\\C#\\Projets\\C-_Projects_GroupeA\\Meteo\\Weather app\\Weather app\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\moyon\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\fabib\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0-windows"
@@ -120,7 +120,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.402/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
