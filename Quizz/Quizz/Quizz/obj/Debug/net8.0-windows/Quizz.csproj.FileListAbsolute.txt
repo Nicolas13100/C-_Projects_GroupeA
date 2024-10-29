@@ -1,0 +1,15 @@
+C:\Users\nicol\OneDrive\Bureau\C#\Quizz\Quizz\Quizz\obj\Debug\net8.0-windows\Quizz.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\nicol\OneDrive\Bureau\C#\Quizz\Quizz\Quizz\obj\Debug\net8.0-windows\Quizz.AssemblyInfoInputs.cache
+C:\Users\nicol\OneDrive\Bureau\C#\Quizz\Quizz\Quizz\obj\Debug\net8.0-windows\Quizz.AssemblyInfo.cs
+C:\Users\nicol\OneDrive\Bureau\C#\Quizz\Quizz\Quizz\obj\Debug\net8.0-windows\Quizz.csproj.CoreCompileInputs.cache
+C:\Users\nicol\OneDrive\Bureau\C#\Quizz\Quizz\Quizz\obj\Debug\net8.0-windows\Quizz.sourcelink.json
+C:\Users\nicol\OneDrive\Bureau\C#\Quizz\Quizz\Quizz\bin\Debug\net8.0-windows\Quizz.exe
+C:\Users\nicol\OneDrive\Bureau\C#\Quizz\Quizz\Quizz\bin\Debug\net8.0-windows\Quizz.deps.json
+C:\Users\nicol\OneDrive\Bureau\C#\Quizz\Quizz\Quizz\bin\Debug\net8.0-windows\Quizz.runtimeconfig.json
+C:\Users\nicol\OneDrive\Bureau\C#\Quizz\Quizz\Quizz\bin\Debug\net8.0-windows\Quizz.dll
+C:\Users\nicol\OneDrive\Bureau\C#\Quizz\Quizz\Quizz\bin\Debug\net8.0-windows\Quizz.pdb
+C:\Users\nicol\OneDrive\Bureau\C#\Quizz\Quizz\Quizz\obj\Debug\net8.0-windows\Quizz.dll
+C:\Users\nicol\OneDrive\Bureau\C#\Quizz\Quizz\Quizz\obj\Debug\net8.0-windows\refint\Quizz.dll
+C:\Users\nicol\OneDrive\Bureau\C#\Quizz\Quizz\Quizz\obj\Debug\net8.0-windows\Quizz.pdb
+C:\Users\nicol\OneDrive\Bureau\C#\Quizz\Quizz\Quizz\obj\Debug\net8.0-windows\Quizz.genruntimeconfig.cache
+C:\Users\nicol\OneDrive\Bureau\C#\Quizz\Quizz\Quizz\obj\Debug\net8.0-windows\ref\Quizz.dll
