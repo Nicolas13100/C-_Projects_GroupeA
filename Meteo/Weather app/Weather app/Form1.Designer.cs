@@ -32,7 +32,7 @@ partial class Form1
     private System.Windows.Forms.Label lblTemperature;
     private System.Windows.Forms.Label lblHumidity;
     private System.Windows.Forms.Label lblConditions;
-    private System.Windows.Forms.PictureBox pictureBoxIcon;
+    private System.Windows.Forms.PictureBox GeneralIcon;
     
     private void InitializeComponent()
     {
@@ -41,7 +41,7 @@ partial class Form1
         this.lblTemperature = new System.Windows.Forms.Label();
         this.lblHumidity = new System.Windows.Forms.Label();
         this.lblConditions = new System.Windows.Forms.Label();
-        this.pictureBoxIcon = new System.Windows.Forms.PictureBox();
+        this.GeneralIcon = new System.Windows.Forms.PictureBox();
         
         // txtCity
         this.txtCity.Location = new System.Drawing.Point(13, 13);
@@ -71,10 +71,10 @@ partial class Form1
         this.lblConditions.Size = new System.Drawing.Size(200, 23);
         
         // pictureBoxIcon
-        this.pictureBoxIcon.Location = new System.Drawing.Point(13, 180);
-        this.pictureBoxIcon.Name = "pictureBoxIcon";
-        this.pictureBoxIcon.Size = new System.Drawing.Size(100, 100);
-        this.pictureBoxIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+        this.GeneralIcon.Location = new System.Drawing.Point(13, 180);
+        this.GeneralIcon.Name = "pictureBoxIcon";
+        this.GeneralIcon.Size = new System.Drawing.Size(100, 100);
+        this.GeneralIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
 
         // Add controls to the form
         this.Controls.Add(this.txtCity);
@@ -82,7 +82,7 @@ partial class Form1
         this.Controls.Add(this.lblTemperature);
         this.Controls.Add(this.lblHumidity);
         this.Controls.Add(this.lblConditions);
-        this.Controls.Add(this.pictureBoxIcon);
+        this.Controls.Add(this.GeneralIcon);
 
         this.Text = "Weather App";
     }
