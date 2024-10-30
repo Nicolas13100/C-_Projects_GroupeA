@@ -70,7 +70,7 @@ namespace Quizz
 
         private void LoadNextQuestion()
         {
-            if (questionIndex < questions.Count)
+            if (questionIndex < 15)
             {
                 // Load the next question
                 currentQuestion = questions[questionIndex];
@@ -248,6 +248,8 @@ private void btnDemanderPublic_Click(object sender, EventArgs e)
             usedFriendHelp = false;
             usedAudienceHelp = false;
             currentGainLevel = 0;
+
+            InitializeQuestions(); 
 
             LoadNextQuestion(); // Load the first question again
         }
