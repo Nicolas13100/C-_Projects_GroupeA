@@ -6,266 +6,325 @@ namespace Calculatrice
 {
     public class Form1 : Form
     {
-        // Components
         private TextBox textBoxDisplay;
         private Button[] buttons;
-        private string input = string.Empty;  // User input
-        private string operand1 = string.Empty; // First number
-        private string operand2 = string.Empty; // Second number
-        private char operation;  // Operator (+, -, *, /)
-        private decimal result = 0.0m;  // Result of calculation
+        private string input = string.Empty;
+        private string operand1 = string.Empty;
+        private string operand2 = string.Empty;
+        private char operation;
+        private decimal result = 0.0m;
 
         public Form1()
         {
             InitializeComponent();
+            this.KeyPreview = true; // Enable key preview to capture key events
+            this.KeyDown += new KeyEventHandler(OnKeyDown); // Handle key down event
         }
 
         private void InitializeComponent()
-{
-    // Initialize form properties
-    this.Text = "Calculator";
-    this.Size = new System.Drawing.Size(375, 520);  // Width, Height
-
-    // Set the FormBorderStyle to FixedDialog to prevent resizing
-    this.FormBorderStyle = FormBorderStyle.FixedDialog; 
-    this.MaximizeBox = false; // Disable the maximize button
-
-    // Create TextBox for display
-    textBoxDisplay = new TextBox();
-    textBoxDisplay.Size = new System.Drawing.Size(340, 50);  // Width, Height
-    textBoxDisplay.Location = new System.Drawing.Point(10, 10);  // X, Y
-    textBoxDisplay.ReadOnly = true;
-    textBoxDisplay.TextAlign = HorizontalAlignment.Right;
-    this.Controls.Add(textBoxDisplay);
-
-    // Create buttons (digits and operators)
-    buttons = new Button[24];
-    string[] buttonLabels = { "%", "CE", "C", "DEL",
-                               "1/x", "x²", "√", "/",
-                               "7", "8", "9", "*",
-                               "4", "5", "6", "-",
-                               "1", "2", "3", "+",
-                               "±", "0", ".", "=" };
-
-    int posX = 10, posY = 60;  // Starting position for buttons
-
-    for (int i = 0; i < buttons.Length; i++)
-    {
-        buttons[i] = new Button();
-        buttons[i].Size = new System.Drawing.Size(80, 60);  // Button size
-        buttons[i].Text = buttonLabels[i];
-        buttons[i].Location = new System.Drawing.Point(posX, posY);
-        buttons[i].Click += new EventHandler(OnButtonClick);  // Add click event
-
-        this.Controls.Add(buttons[i]);
-
-        posX += 85;  // Horizontal spacing
-
-        if ((i + 1) % 4 == 0)
         {
-            posX = 10;  // Reset X position after 4 buttons
-            posY += 70; // Move to next row
-        }
-    }
-}
+            this.Text = "Calculator";
+            this.Size = new System.Drawing.Size(375, 520);
+            this.FormBorderStyle = FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
 
-        // Event handler for button clicks
-       private void OnButtonClick(object sender, EventArgs e)
-{
-    Button button = (Button)sender;
+            textBoxDisplay = new TextBox();
+            textBoxDisplay.Size = new System.Drawing.Size(340, 50);
+            textBoxDisplay.Location = new System.Drawing.Point(10, 10);
+            textBoxDisplay.ReadOnly = true;
+            textBoxDisplay.TextAlign = HorizontalAlignment.Right;
+            this.Controls.Add(textBoxDisplay);
 
-    // Handle Clear button
-    if (button.Text == "C" || button.Text == "CE")
-    {
-        textBoxDisplay.Clear();
-        input = operand1 = operand2 = string.Empty;
-        return;
-    }
+            buttons = new Button[24];
+            string[] buttonLabels = { "%", "CE", "C", "DEL",
+                                       "1/x", "x²", "√", "/",
+                                       "7", "8", "9", "*",
+                                       "4", "5", "6", "-",
+                                       "1", "2", "3", "+",
+                                       "±", "0", ".", "=" };
 
-    // Handle ± button to toggle the sign of the current input
-    if (button.Text == "±")
-    {
-        if (!string.IsNullOrEmpty(input))
-        {
-            // Toggle sign
-            if (input.StartsWith("-"))
+            int posX = 10, posY = 60;
+
+            for (int i = 0; i < buttons.Length; i++)
             {
-                input = input.Substring(1);
-            }
-            else
-            {
-                input = "-" + input;
-            }
-        }
-        else
-        {
-            // Start a negative input if input is empty
-            input = "-";
-        }
-        textBoxDisplay.Text = input; // Update display
-        return;
-    }
+                buttons[i] = new Button();
+                buttons[i].Size = new System.Drawing.Size(80, 60);
+                buttons[i].Text = buttonLabels[i];
+                buttons[i].Location = new System.Drawing.Point(posX, posY);
+                buttons[i].Click += new EventHandler(OnButtonClick);
 
-    // Handle DEL button - delete the last character from input
-    if (button.Text == "DEL")
-    {
-        if (input.Length > 0)
-        {
-            input = input.Substring(0, input.Length - 1); // Remove last character
-            textBoxDisplay.Text = input; // Update display
-        }
-        return;
-    }
+                this.Controls.Add(buttons[i]);
 
-    // Handle digit buttons
-    if (button.Text.Length == 1 && char.IsDigit(button.Text[0]))
-    {
-        input += button.Text; // Append the button text to the input string
-        textBoxDisplay.Text = input; // Update the display text box with the new input
-    }
-    // Handle the decimal point button
-    else if (button.Text == ".")
-    {
-        // Allow adding a decimal point only if there isn't already one in the input
-        if (!input.Contains("."))
-        {
-            input += ".";
-            textBoxDisplay.Text = input; // Update display
-        }
-        return;
-    }
+                posX += 85;
 
-    // Handle operator buttons
-    else if ("+-*/".Contains(button.Text))
-    {
-        // If the input is not empty, set operand1 and the operation
-        if (!string.IsNullOrEmpty(input))
-        {
-            operand1 = input;
-            operation = button.Text[0];
-            input = string.Empty; // Clear input for the next number
-        }
-        else if (button.Text == "-")
-        {
-            // If input is empty, we are starting a negative number
-            input = "-"; // Start negative input
-        }
-        return;
-    }
-
-    // Handle equals button
-    else if (button.Text == "=")
-    {
-        // Only calculate if both operands are present
-        if (!string.IsNullOrEmpty(operand1) && !string.IsNullOrEmpty(input))
-        {
-            operand2 = input; // Set the second operand
-
-            try
-            {
-                // Convert operands to decimal and calculate
-                decimal num1 = decimal.Parse(operand1, CultureInfo.InvariantCulture);
-                decimal num2 = decimal.Parse(operand2, CultureInfo.InvariantCulture);
-
-                switch (operation)
+                if ((i + 1) % 4 == 0)
                 {
-                    case '+':
-                        result = num1 + num2;
-                        break;
-                    case '-':
-                        result = num1 - num2;
-                        break;
-                    case '*':
-                        result = num1 * num2;
-                        break;
-                    case '/':
-                        if (num2 != 0)
-                            result = num1 / num2;
-                        else
-                            MessageBox.Show("Cannot divide by zero!");
-                        break;
+                    posX = 10;
+                    posY += 70;
                 }
-
-                // Display the result
-                textBoxDisplay.Text = result.ToString(CultureInfo.InvariantCulture);
-                input = result.ToString(CultureInfo.InvariantCulture); // Update input for further calculations
-                operand1 = operand2 = string.Empty; // Clear operands after calculation
-            }
-            catch (FormatException)
-            {
-                MessageBox.Show("Invalid input format. Please check your numbers.");
-                input = string.Empty; // Clear input if there's a format error
             }
         }
-        return;
-    }
 
-    // Handle percentage button
-    else if (button.Text == "%")
-    {
-        // Check if there's any input to calculate the percentage
-        if (!string.IsNullOrEmpty(input))
+        private void OnButtonClick(object sender, EventArgs e)
         {
-            decimal number = decimal.Parse(input, CultureInfo.InvariantCulture); // Handle decimal input
-            result = number / 100; // Calculate percentage
-            textBoxDisplay.Text = result.ToString(CultureInfo.InvariantCulture); // Display the result
-            input = result.ToString(CultureInfo.InvariantCulture); // Update input for further calculations
+            Button button = (Button)sender;
+            HandleButtonInput(button.Text);
         }
-        return;
-    }
 
-    // Handle 1/x button
-    else if (button.Text == "1/x")
-    {
-        if (!string.IsNullOrEmpty(input))
+        private void OnKeyDown(object sender, KeyEventArgs e)
         {
-            decimal number = decimal.Parse(input, CultureInfo.InvariantCulture); // Handle decimal input
-            if (number != 0)
+            switch (e.KeyCode)
             {
-                result = 1 / number; // Calculate reciprocal
-                textBoxDisplay.Text = result.ToString(CultureInfo.InvariantCulture); // Display the result
-                input = result.ToString(CultureInfo.InvariantCulture); // Update input for further calculations
-            }
-            else
-            {
-                MessageBox.Show("Cannot calculate the reciprocal of zero!");
+                case Keys.D0:
+                case Keys.NumPad0:
+                    HandleButtonInput("0");
+                    break;
+                case Keys.D1:
+                case Keys.NumPad1:
+                    HandleButtonInput("1");
+                    break;
+                case Keys.D2:
+                case Keys.NumPad2:
+                    HandleButtonInput("2");
+                    break;
+                case Keys.D3:
+                case Keys.NumPad3:
+                    HandleButtonInput("3");
+                    break;
+                case Keys.D4:
+                case Keys.NumPad4:
+                    HandleButtonInput("4");
+                    break;
+                case Keys.D5:
+                case Keys.NumPad5:
+                    HandleButtonInput("5");
+                    break;
+                case Keys.D6:
+                case Keys.NumPad6:
+                    HandleButtonInput("6");
+                    break;
+                case Keys.D7:
+                case Keys.NumPad7:
+                    HandleButtonInput("7");
+                    break;
+                case Keys.D8:
+                case Keys.NumPad8:
+                    HandleButtonInput("8");
+                    break;
+                case Keys.D9:
+                case Keys.NumPad9:
+                    HandleButtonInput("9");
+                    break;
+                case Keys.Add:
+                    HandleButtonInput("+");
+                    break;
+                case Keys.Subtract:
+                    HandleButtonInput("-");
+                    break;
+                case Keys.Multiply:
+                    HandleButtonInput("*");
+                    break;
+                case Keys.Divide:
+                    HandleButtonInput("/");
+                    break;
+                case Keys.Decimal:
+                    HandleButtonInput(".");
+                    break;
+                case Keys.Enter:
+                    HandleButtonInput("=");
+                    break;
+                case Keys.Back:
+                    HandleButtonInput("DEL");
+                    break;
+                case Keys.Escape:
+                    HandleButtonInput("C");
+                    break;
+                default:
+                    break;
             }
         }
-        return;
-    }
 
-    // Handle x² button
-    else if (button.Text == "x²")
-    {
-        if (!string.IsNullOrEmpty(input))
+        private void HandleButtonInput(string buttonText)
         {
-            decimal number = decimal.Parse(input, CultureInfo.InvariantCulture); // Handle decimal input
-            result = number * number; // Calculate square
-            textBoxDisplay.Text = result.ToString(CultureInfo.InvariantCulture); // Display the result
-            input = result.ToString(CultureInfo.InvariantCulture); // Update input for further calculations
-        }
-        return;
-    }
+            // Handle Clear button
+            if (buttonText == "C" || buttonText == "CE")
+            {
+                textBoxDisplay.Clear();
+                input = operand1 = operand2 = string.Empty;
+                return;
+            }
 
-    // Handle √ button
-    else if (button.Text == "√")
-    {
-        if (!string.IsNullOrEmpty(input))
-        {
-            decimal number = decimal.Parse(input, CultureInfo.InvariantCulture); // Handle decimal input
-            if (number >= 0)
+            // Handle ± button to toggle the sign of the current input
+            if (buttonText == "±")
             {
-                result = (decimal)Math.Sqrt((double)number); // Calculate square root
-                textBoxDisplay.Text = result.ToString(CultureInfo.InvariantCulture); // Display the result
-                input = result.ToString(CultureInfo.InvariantCulture); // Update input for further calculations
+                if (!string.IsNullOrEmpty(input))
+                {
+                    if (input.StartsWith("-"))
+                        input = input.Substring(1);
+                    else
+                        input = "-" + input;
+                }
+                else
+                {
+                    input = "-";
+                }
+                textBoxDisplay.Text = input;
+                return;
             }
-            else
+
+            // Handle DEL button - delete the last character from input
+            if (buttonText == "DEL")
             {
-                MessageBox.Show("Cannot calculate the square root of a negative number!");
+                if (input.Length > 0)
+                {
+                    input = input.Substring(0, input.Length - 1);
+                    textBoxDisplay.Text = input;
+                }
+                return;
+            }
+
+            // Handle digit buttons
+            if (buttonText.Length == 1 && char.IsDigit(buttonText[0]))
+            {
+                input += buttonText;
+                textBoxDisplay.Text = input;
+            }
+            // Handle decimal point button
+            else if (buttonText == ".")
+            {
+                if (!input.Contains("."))
+                {
+                    input += ".";
+                    textBoxDisplay.Text = input;
+                }
+                return;
+            }
+
+            // Handle operator buttons
+            else if ("+-*/".Contains(buttonText))
+            {
+                if (!string.IsNullOrEmpty(input))
+                {
+                    operand1 = input;
+                    operation = buttonText[0];
+                    input = string.Empty;
+                }
+                else if (buttonText == "-")
+                {
+                    input = "-";
+                }
+                return;
+            }
+
+            // Handle equals button
+            else if (buttonText == "=")
+            {
+                if (!string.IsNullOrEmpty(operand1) && !string.IsNullOrEmpty(input))
+                {
+                    operand2 = input;
+
+                    try
+                    {
+                        decimal num1 = decimal.Parse(operand1, CultureInfo.InvariantCulture);
+                        decimal num2 = decimal.Parse(operand2, CultureInfo.InvariantCulture);
+
+                        switch (operation)
+                        {
+                            case '+':
+                                result = num1 + num2;
+                                break;
+                            case '-':
+                                result = num1 - num2;
+                                break;
+                            case '*':
+                                result = num1 * num2;
+                                break;
+                            case '/':
+                                if (num2 != 0)
+                                    result = num1 / num2;
+                                else
+                                    MessageBox.Show("Cannot divide by zero!");
+                                break;
+                        }
+
+                        textBoxDisplay.Text = result.ToString(CultureInfo.InvariantCulture);
+                        input = result.ToString(CultureInfo.InvariantCulture);
+                        operand1 = operand2 = string.Empty;
+                    }
+                    catch (FormatException)
+                    {
+                        MessageBox.Show("Invalid input format. Please check your numbers.");
+                        input = string.Empty;
+                    }
+                }
+                return;
+            }
+
+            // Handle percentage button
+            else if (buttonText == "%")
+            {
+                if (!string.IsNullOrEmpty(input))
+                {
+                    decimal number = decimal.Parse(input, CultureInfo.InvariantCulture);
+                    result = number / 100;
+                    textBoxDisplay.Text = result.ToString(CultureInfo.InvariantCulture);
+                    input = result.ToString(CultureInfo.InvariantCulture);
+                }
+                return;
+            }
+
+            // Handle 1/x button
+            else if (buttonText == "1/x")
+            {
+                if (!string.IsNullOrEmpty(input))
+                {
+                    decimal number = decimal.Parse(input, CultureInfo.InvariantCulture);
+                    if (number != 0)
+                    {
+                        result = 1 / number;
+                        textBoxDisplay.Text = result.ToString(CultureInfo.InvariantCulture);
+                        input = result.ToString(CultureInfo.InvariantCulture);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Cannot calculate the reciprocal of zero!");
+                    }
+                }
+                return;
+            }
+
+            // Handle x² button
+            else if (buttonText == "x²")
+            {
+                if (!string.IsNullOrEmpty(input))
+                {
+                    decimal number = decimal.Parse(input, CultureInfo.InvariantCulture);
+                    result = number * number;
+                    textBoxDisplay.Text = result.ToString(CultureInfo.InvariantCulture);
+                    input = result.ToString(CultureInfo.InvariantCulture);
+                }
+                return;
+            }
+
+            // Handle √ button
+            else if (buttonText == "√")
+            {
+                if (!string.IsNullOrEmpty(input))
+                {
+                    decimal number = decimal.Parse(input, CultureInfo.InvariantCulture);
+                    if (number >= 0)
+                    {
+                        result = (decimal)Math.Sqrt((double)number);
+                        textBoxDisplay.Text = result.ToString(CultureInfo.InvariantCulture);
+                        input = result.ToString(CultureInfo.InvariantCulture);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Cannot calculate the square root of a negative number!");
+                    }
+                }
+                return;
             }
         }
-        return;
-    }
-}
     }
 }
