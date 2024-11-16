@@ -7,53 +7,65 @@ namespace Quizz
 {
     public partial class Form1 : Form
     {
-        private List<Question> questions;
         private Question currentQuestion;
         private Random random = new Random();
         private int score = 0;
+        private int answeredQuestions = 0;
         private int questionIndex = 0; // Index to track the progression of questions
         private bool used5050 = false, usedFriendHelp = false, usedAudienceHelp = false; // Lifeline tracking
         private int currentGainLevel = 0; // Current gain level
         private List<int> currentDisplayedIndices = new List<int>(); // Keep track of currently displayed indices
+        private string actualTheme;
+        private Question asking = new Question("Choisissez le thème des 3 prochaines questions.", new List<string> {"Géographie", "Vivant", "Sciences", "Personnalités", "Arts"}, 0, "Nul");
+        private List<Question> allQuestions = new List<Question>
+            {
+                new Question("Quelle est la capitale de la France ?", new List<string> { "Paris", "Londres", "Berlin", "Madrid" }, 0, "Géographie"),
+                new Question("Quel est le plus grand océan ?", new List<string> { "Atlantique", "Indien", "Pacifique", "Arctique" }, 2, "Géographie"),
+                new Question("Combien de continents y a-t-il ?", new List<string> { "5", "6", "7", "8" }, 2, "Géographie"),
+                new Question("Quel est l'animal national de l'Australie ?", new List<string> { "Kangourou", "Koala", "Dingo", "Émeu" }, 0, "Géographie"),
+                new Question("Quel est le pays d'origine du fromage parmesan ?", new List<string> { "France", "Italie", "Espagne", "Suisse" }, 1, "Géographie"),
+                new Question("Quel est le plus long fleuve du monde ?", new List<string> { "Nile", "Amazon", "Yangzi", "Mississippi" }, 1, "Géographie"),
+                new Question("Quel est le pays le plus peuplé du monde ?", new List<string> { "États-Unis", "Inde", "Chine", "Indonésie" }, 2, "Géographie"),
+                new Question("Quel est le nom de la plus grande chaîne de montagnes du monde ?", new List<string> { "Himalaya", "Andes", "Alpes", "Rocallie" }, 0, "Géographie"),
+                new Question("Quelle est la langue officielle du Brésil ?", new List<string> { "Espagnol", "Portugais", "Anglais", "Français" }, 1, "Géographie"),
+                new Question("Quel est le plus grand mammifère terrestre ?", new List<string> { "Éléphant", "Giraffe", "Rhinocéros", "Hippopotame" }, 0, "Vivant"),
+                new Question("Quel fruit est connu pour sa richesse en vitamine C ?", new List<string> { "Banane", "Pomme", "Orange", "Raisin" }, 2, "Vivant"),
+                new Question("Quel est le nom de l'organe responsable de la respiration ?", new List<string> { "Cœur", "Poumons", "Foie", "Reins" }, 1, "Vivant"),
+                new Question("Quel est l'organe principal du système circulatoire ?", new List<string> { "Cerveau", "Cœur", "Foie", "Reins" }, 1, "Vivant"),
+                new Question("Quel est l'élément chimique dont le symbole est 'O' ?", new List<string> { "Or", "Oxygène", "Hydrogène", "Carbone" }, 1, "Sciences"),
+                new Question("Quel est le symbole chimique de l'or ?", new List<string> { "Au", "Ag", "Pb", "Fe" }, 0, "Sciences"),
+                new Question("Quel est le principal gaz à effet de serre ?", new List<string> { "Dioxyde de carbone", "Méthane", "Oxygène", "Azote" }, 0, "Sciences"),
+                new Question("Quel pays a été le premier à envoyer un homme dans l'espace ?", new List<string> { "États-Unis", "Russie", "Chine", "France" }, 1, "Sciences"),
+                new Question("Quel est le nom du premier satellite artificiel lancé dans l'espace ?", new List<string> { "Apollo 11", "Voyager 1", "Spoutnik 1", "Hubble" }, 2, "Sciences"),
+                new Question("Quel physicien a développé la théorie de la relativité ?", new List<string> { "Isaac Newton", "Albert Einstein", "Galilée", "Niels Bohr" }, 1, "Personnalités"),
+                new Question("Qui a découvert la pénicilline ?", new List<string> { "Louis Pasteur", "Alexander Fleming", "Marie Curie", "Joseph Lister" }, 1, "Personnalités"),
+                new Question("Quel est le prix Nobel de la paix 2021 ?", new List<string> { "Abiy Ahmed", "Maria Ressa", "Malala Yousafzai", "Al Gore" }, 1, "Personnalités"),
+                new Question("Qui a écrit 'Les Misérables' ?", new List<string> { "Émile Zola", "Victor Hugo", "Gustave Flaubert", "Marcel Proust" }, 1, "Arts"),
+                new Question("Qui a peint 'La Nuit étoilée' ?", new List<string> { "Pablo Picasso", "Vincent van Gogh", "Claude Monet", "Henri Matisse" }, 1, "Arts"),
+                new Question("Quel écrivain a écrit 'À la recherche du temps perdu' ?", new List<string> { "Marcel Proust", "Victor Hugo", "Gustave Flaubert", "Émile Zola" }, 0, "Arts"),
+            };
+        private List<Question> currentQuestions = new List<Question>();
 
         public Form1()
         {
             InitializeComponent();
-            InitializeQuestions();
+            AskForTheme();
+            GetQuestions();
             LoadNextQuestion();
         }
 
-        private void InitializeQuestions()
+        private void GetQuestions()
         {
-            questions = new List<Question>
+            currentQuestions.Clear();
+            while (currentQuestions.Count < 3)
             {
-                new Question("Quelle est la capitale de la France ?", new List<string> { "Paris", "Londres", "Berlin", "Madrid" }, 0),
-                new Question("Quel est le plus grand océan ?", new List<string> { "Atlantique", "Indien", "Pacifique", "Arctique" }, 2),
-                new Question("Combien de continents y a-t-il ?", new List<string> { "5", "6", "7", "8" }, 2),
-                new Question("Quel est le plus grand mammifère terrestre ?", new List<string> { "Éléphant", "Giraffe", "Rhinocéros", "Hippopotame" }, 0),
-                new Question("Quel est l'animal national de l'Australie ?", new List<string> { "Kangourou", "Koala", "Dingo", "Émeu" }, 0),
-                new Question("Quel fruit est connu pour sa richesse en vitamine C ?", new List<string> { "Banane", "Pomme", "Orange", "Raisin" }, 2),
-                new Question("Quel est le pays d'origine du fromage parmesan ?", new List<string> { "France", "Italie", "Espagne", "Suisse" }, 1),
-                new Question("Quel est le plus long fleuve du monde ?", new List<string> { "Nile", "Amazon", "Yangzi", "Mississippi" }, 1),
-                new Question("Quel est l'élément chimique dont le symbole est 'O' ?", new List<string> { "Or", "Oxygène", "Hydrogène", "Carbone" }, 1),
-                new Question("Qui a écrit 'Les Misérables' ?", new List<string> { "Émile Zola", "Victor Hugo", "Gustave Flaubert", "Marcel Proust" }, 1),
-                new Question("Quel est le nom de l'organe responsable de la respiration ?", new List<string> { "Cœur", "Poumons", "Foie", "Reins" }, 1),
-                new Question("Quel est le symbole chimique de l'or ?", new List<string> { "Au", "Ag", "Pb", "Fe" }, 0),
-                new Question("Qui a peint 'La Nuit étoilée' ?", new List<string> { "Pablo Picasso", "Vincent van Gogh", "Claude Monet", "Henri Matisse" }, 1),
-                new Question("Quel écrivain a écrit 'À la recherche du temps perdu' ?", new List<string> { "Marcel Proust", "Victor Hugo", "Gustave Flaubert", "Émile Zola" }, 0),
-                new Question("Quel est le nom du premier satellite artificiel lancé dans l'espace ?", new List<string> { "Apollo 11", "Voyager 1", "Spoutnik 1", "Hubble" }, 2),
-                new Question("Quel physicien a développé la théorie de la relativité ?", new List<string> { "Isaac Newton", "Albert Einstein", "Galilée", "Niels Bohr" }, 1),
-                new Question("Quel est l'organe principal du système circulatoire ?", new List<string> { "Cerveau", "Cœur", "Foie", "Reins" }, 1),
-                new Question("Quel pays a été le premier à envoyer un homme dans l'espace ?", new List<string> { "États-Unis", "Russie", "Chine", "France" }, 1),
-                new Question("Quel est le pays le plus peuplé du monde ?", new List<string> { "États-Unis", "Inde", "Chine", "Indonésie" }, 2),
-                new Question("Quelle est la langue officielle du Brésil ?", new List<string> { "Espagnol", "Portugais", "Anglais", "Français" }, 1),
-                new Question("Qui a découvert la pénicilline ?", new List<string> { "Louis Pasteur", "Alexander Fleming", "Marie Curie", "Joseph Lister" }, 1),
-                new Question("Quel est le nom de la plus grande chaîne de montagnes du monde ?", new List<string> { "Himalaya", "Andes", "Alpes", "Rocallie" }, 0),
-                new Question("Quel est le prix Nobel de la paix 2021 ?", new List<string> { "Abiy Ahmed", "Maria Ressa", "Malala Yousafzai", "Al Gore" }, 1),
-                new Question("Quel est le principal gaz à effet de serre ?", new List<string> { "Dioxyde de carbone", "Méthane", "Oxygène", "Azote" }, 0)
-            };
-
-            ShuffleQuestions(questions); // Shuffle the questions
+                Question nextQuestion = allQuestions[random.Next()];
+                while (nextQuestion.Theme != actualTheme)
+                {
+                    nextQuestion = allQuestions[random.Next(allQuestions.Count)];
+                }
+                currentQuestions.Add(nextQuestion);
+            }
         }
 
         private void ShuffleQuestions(List<Question> questions)
@@ -70,26 +82,33 @@ namespace Quizz
 
         private void LoadNextQuestion()
         {
-            if (questionIndex < 15)
+            if (answeredQuestions < 15)
             {
-                // Load the next question
-                currentQuestion = questions[questionIndex];
-                lblQuestion.Text = currentQuestion.Texte;
-                listBoxChoix.Items.Clear();
-                listBoxChoix.Items.AddRange(currentQuestion.Choix.ToArray());
-
-                // Populate currentDisplayedIndices with all choice indices
-                currentDisplayedIndices.Clear(); // Clear previous indices
-                for (int i = 0; i < currentQuestion.Choix.Count; i++)
+                if (questionIndex == 3)
                 {
-                    currentDisplayedIndices.Add(i);
+                    questionIndex = 0;
+                    AskForTheme(); // Asks for the theme of the 3 next questions
+                    GetQuestions(); // Generates the 3 next questions
+                } else {
+                    // Load the next question
+                    currentQuestion = currentQuestions[questionIndex];
+                    lblQuestion.Text = currentQuestion.Texte;
+                    listBoxChoix.Items.Clear();
+                    listBoxChoix.Items.AddRange(currentQuestion.Choix.ToArray());
+
+                    // Populate currentDisplayedIndices with all choice indices
+                    currentDisplayedIndices.Clear(); // Clear previous indices
+                    for (int i = 0; i < currentQuestion.Choix.Count; i++)
+                    {
+                        currentDisplayedIndices.Add(i);
+                    }
+                    UpdateGainsDisplay(); // Updates gain display
+
+                    questionIndex++;
                 }
 
                 btnValider.Enabled = false; // Disable button until an answer is selected
                 listBoxChoix.SelectedIndexChanged += ListBoxChoix_SelectedIndexChanged;
-
-                UpdateGainsDisplay(); // Update gain display
-                questionIndex++;
             }
             else
             {
@@ -108,6 +127,24 @@ namespace Quizz
             btnValider.Enabled = true; // Enable button once an answer is selected
         }
 
+        private void AskForTheme()
+        {
+            //Disables the bonus buttons
+            btnAppelAmi.Enabled = false; 
+            btn5050.Enabled = false;
+            btnDemanderPublic.Enabled = false;
+
+            lblQuestion.Text = asking.Texte;
+            listBoxChoix.Items.Clear();
+            listBoxChoix.Items.AddRange(asking.Choix.ToArray());
+
+            currentDisplayedIndices.Clear();
+            for (int i = 0; i < asking.Choix.Count; i++)
+            {
+                currentDisplayedIndices.Add(i);
+            }
+        }
+
         private void btnValider_Click(object sender, EventArgs e)
         {
             int indexChoix = listBoxChoix.SelectedIndex; // This is the index in the reduced list
@@ -121,22 +158,29 @@ namespace Quizz
                 return;
             }
 
-            // Get the original correct answer index based on the current displayed indices
-            int originalCorrectIndex = currentQuestion.ReponseCorrecte;
-
             // Determine which index corresponds to the selected answer in the original list
             int selectedOriginalIndex = currentDisplayedIndices[indexChoix]; // Index in the displayed choices
-
-            if (selectedOriginalIndex == originalCorrectIndex)
+            
+            if (questionIndex < 3)
             {
-                score++;
-                currentGainLevel++;
-                MessageBox.Show($"Correct! Vous avez gagné: {listBoxGains.Items[listBoxGains.Items.Count - currentGainLevel]}");
-                LoadNextQuestion(); // Move to the next question
-            }
+                // Get the original correct answer index based on the current displayed indices
+                int originalCorrectIndex = currentQuestion.ReponseCorrecte;
+
+                if (selectedOriginalIndex == originalCorrectIndex)
+                {
+                    score++;
+                    currentGainLevel++;
+                    MessageBox.Show($"Correct! Vous avez gagné: {listBoxGains.Items[listBoxGains.Items.Count - currentGainLevel]}");
+                    LoadNextQuestion(); // Move to the next question
+                }
+                else
+                {
+                    EndGame(false); // End game with an incorrect answer
+                }
+            } 
             else
             {
-                EndGame(false); // End game with an incorrect answer
+                actualTheme = asking.Choix[selectedOriginalIndex];
             }
         }
 
@@ -249,7 +293,8 @@ private void btnDemanderPublic_Click(object sender, EventArgs e)
             usedAudienceHelp = false;
             currentGainLevel = 0;
 
-            InitializeQuestions(); 
+            AskForTheme();
+            GetQuestions(); 
 
             LoadNextQuestion(); // Load the first question again
         }
@@ -260,12 +305,14 @@ private void btnDemanderPublic_Click(object sender, EventArgs e)
         public string Texte { get; }
         public List<string> Choix { get; }
         public int ReponseCorrecte { get; }
+        public string Theme { get; }
 
-        public Question(string texte, List<string> choix, int reponseCorrecte)
+        public Question(string texte, List<string> choix, int reponseCorrecte, string theme)
         {
             Texte = texte;
             Choix = choix;
             ReponseCorrecte = reponseCorrecte;
+            Theme = theme;
         }
     }
 }
