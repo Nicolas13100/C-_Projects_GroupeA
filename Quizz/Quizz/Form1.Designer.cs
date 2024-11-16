@@ -41,8 +41,8 @@
             // listBoxChoix
             this.listBoxChoix.Location = new System.Drawing.Point(50, 100);
             this.listBoxChoix.Size = new System.Drawing.Size(700, 150);
-            this.listBoxChoix.SelectedIndexChanged += new System.EventHandler(this.listBoxChoix_SelectedIndexChanged);
-
+            
+            
             // btnValider
             this.btnValider.Location = new System.Drawing.Point(200, 300);
             this.btnValider.Size = new System.Drawing.Size(100, 30);
