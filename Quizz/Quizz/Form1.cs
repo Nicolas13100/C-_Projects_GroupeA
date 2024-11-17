@@ -18,7 +18,7 @@ namespace Quizz
         private List<int> currentDisplayedIndices = new List<int>(); // Keep track of currently displayed indices
         private string actualTheme = "";
 
-         private Question asking = new Question("Choisissez le thème des 3 prochaines questions.",
+        private Question asking = new Question("Choisissez le thème des 3 prochaines questions.",
             new List<string> { "Géographie", "Vivant", "Sciences", "Personnalités", "Arts" }, 0, "Nul");
 
         private List<Question> allQuestions = new List<Question>
@@ -211,6 +211,7 @@ namespace Quizz
             if (lblQuestion.Text == asking.Texte) // Check if the question is asking for the theme
             {
                 actualTheme = asking.Choix[actualIndex]; // Update the actualTheme variable with the selected theme
+                asking.Choix.RemoveAt(actualIndex); // Removes the chosen theme from the list of possible themes
                 btnAppelAmi.Enabled = true; // Enable the lifeline buttons after theme selection
                 btn5050.Enabled = true;
                 btnDemanderPublic.Enabled = true;
@@ -249,7 +250,7 @@ namespace Quizz
                 // Calculate guaranteed prize base on the current gain level 
                 int guaranteedPrizeLevel = currentGainLevel >= 10 ? 10 : (currentGainLevel >= 5 ? 5 : 0);
                 message = "Dommage ! Vous avez perdu. Votre gain garanti est le niveau : " +
-                          listBoxGains.Items[listBoxGains.Items.Count - guaranteedPrizeLevel - 1] + ".";
+                        listBoxGains.Items[listBoxGains.Items.Count - guaranteedPrizeLevel - 1] + ".";
 
             }
 
@@ -260,6 +261,8 @@ namespace Quizz
             answeredQuestions = 0;
             questionIndex = 0;
             currentGainLevel = 0;
+            asking = new Question("Choisissez le thème des 3 prochaines questions.",
+                new List<string> { "Géographie", "Vivant", "Sciences", "Personnalités", "Arts" }, 0, "Nul");
 
             AskForTheme();
         }
