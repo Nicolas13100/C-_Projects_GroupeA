@@ -37,7 +37,7 @@ namespace Weather_app
 
                 // Optional: Load weather icon
                 string iconUrl = $"http://openweathermap.org/img/wn/{weather.Weather[0].Icon}@2x.png";
-                pictureBoxIcon.Load(iconUrl);
+                GeneralIcon.Load(iconUrl);
             }
             catch (Exception ex)
             {
