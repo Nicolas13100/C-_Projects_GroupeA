@@ -1,0 +1,15 @@
+C:\Users\vitod\OneDrive\Documents\Ynov\B2\C#\C-_Projects_GroupeA\morpion\Morpion\bin\Debug\net8.0-windows\Morpion.exe
+C:\Users\vitod\OneDrive\Documents\Ynov\B2\C#\C-_Projects_GroupeA\morpion\Morpion\bin\Debug\net8.0-windows\Morpion.deps.json
+C:\Users\vitod\OneDrive\Documents\Ynov\B2\C#\C-_Projects_GroupeA\morpion\Morpion\bin\Debug\net8.0-windows\Morpion.runtimeconfig.json
+C:\Users\vitod\OneDrive\Documents\Ynov\B2\C#\C-_Projects_GroupeA\morpion\Morpion\bin\Debug\net8.0-windows\Morpion.dll
+C:\Users\vitod\OneDrive\Documents\Ynov\B2\C#\C-_Projects_GroupeA\morpion\Morpion\bin\Debug\net8.0-windows\Morpion.pdb
+C:\Users\vitod\OneDrive\Documents\Ynov\B2\C#\C-_Projects_GroupeA\morpion\Morpion\obj\Debug\net8.0-windows\Morpion.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\vitod\OneDrive\Documents\Ynov\B2\C#\C-_Projects_GroupeA\morpion\Morpion\obj\Debug\net8.0-windows\Morpion.AssemblyInfoInputs.cache
+C:\Users\vitod\OneDrive\Documents\Ynov\B2\C#\C-_Projects_GroupeA\morpion\Morpion\obj\Debug\net8.0-windows\Morpion.AssemblyInfo.cs
+C:\Users\vitod\OneDrive\Documents\Ynov\B2\C#\C-_Projects_GroupeA\morpion\Morpion\obj\Debug\net8.0-windows\Morpion.csproj.CoreCompileInputs.cache
+C:\Users\vitod\OneDrive\Documents\Ynov\B2\C#\C-_Projects_GroupeA\morpion\Morpion\obj\Debug\net8.0-windows\Morpion.sourcelink.json
+C:\Users\vitod\OneDrive\Documents\Ynov\B2\C#\C-_Projects_GroupeA\morpion\Morpion\obj\Debug\net8.0-windows\Morpion.dll
+C:\Users\vitod\OneDrive\Documents\Ynov\B2\C#\C-_Projects_GroupeA\morpion\Morpion\obj\Debug\net8.0-windows\refint\Morpion.dll
+C:\Users\vitod\OneDrive\Documents\Ynov\B2\C#\C-_Projects_GroupeA\morpion\Morpion\obj\Debug\net8.0-windows\Morpion.pdb
+C:\Users\vitod\OneDrive\Documents\Ynov\B2\C#\C-_Projects_GroupeA\morpion\Morpion\obj\Debug\net8.0-windows\Morpion.genruntimeconfig.cache
+C:\Users\vitod\OneDrive\Documents\Ynov\B2\C#\C-_Projects_GroupeA\morpion\Morpion\obj\Debug\net8.0-windows\ref\Morpion.dll
